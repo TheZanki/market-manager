@@ -1,0 +1,58 @@
+<div class="wrapper">
+	<div class="market">
+
+		<div class="market-search">
+				<nz-input-group [nzAddOnAfter]="addOnAfterTemplate">
+					<input nz-input placeholder="Search" #search (keyup.enter)="onSearchEnter(search.value)"/>
+				</nz-input-group>
+
+				<ng-template #addOnAfterTemplate>
+					<nz-select [(ngModel)]="searchSelect">
+						<nz-option *ngFor="let m of marketList" [nzLabel]="m.name" [nzValue]="m.id"></nz-option>
+						<nz-option nzLabel="All" [nzValue]="5"></nz-option>
+					</nz-select>
+				</ng-template>
+		</div>
+
+		<div class="market-list"> 
+			<div class="market-list__item" *ngFor="let m of marketList; index as im">
+				<div class="market-item">
+					<div class="market-item__name">
+						{{m.name}}
+					</div>
+					<div class="market-item__goods">
+						<!-- <nz-empty></nz-empty> -->
+
+						<nz-radio-group [(ngModel)]="m.selectedItem" (ngModelChange)="onItemSelected(m, im)">
+							<label class="goods-list" nz-radio *ngFor="let i of m.list" [nzValue]="i">
+								<div class="goods">
+									<div class="goods__name">{{i.itemName}}</div>
+									<!-- <div class="goods__bundle">{{i.bundle}}</div>
+									<div class="goods__image"></div>
+									<div class="goods__old-price">{{i.oldPrice}}</div>
+									<div class="goods__price">{{i.price}}</div> -->
+								</div>
+							</label>
+						</nz-radio-group>
+					</div> 
+				</div>
+			</div>
+		</div>
+
+		<div class="market-form">
+			<form nz-form [formGroup]="itemForm" (ngSubmit)="submitForm()">
+				<nz-form-item *ngFor="let control of marketFormControls; index as i">
+					<nz-form-label [nzFor]="control.name">{{control.title}}</nz-form-label>
+					<nz-form-control nzErrorTip="The input is not valid">
+						<input [type]="control.type" nz-input nzInputType="number" [formControlName]="control.name" [id]="control.name" />
+					</nz-form-control>
+				</nz-form-item>
+				<nz-form-item style="text-align: center;">
+					<nz-form-control>
+						<button nz-button class="market-form__submit" [nzLoading]="" nzType="primary">Submit</button>
+					</nz-form-control>
+				</nz-form-item>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,78 @@
+$gray: rgb(221, 221, 221);
+
+.wrapper {
+	max-width: 1600px;
+	margin: 0 auto;
+}
+
+.market-search {
+		margin: 25px 0;
+}
+
+.market-list { 
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+
+	&__item {
+		flex-basis: 50%;
+		min-height: 300px;
+		max-height: 300px;
+		border: 1px solid $gray;
+	}
+}
+
+.market-item {
+	height: 100%;
+
+	&__name {
+		line-height: 30px;	
+		text-align: center;
+		border-bottom: 1px solid $gray;
+	}
+
+	&__goods {
+		height: calc(100% - 30px);
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+}
+
+.market-form {
+	border: 1px solid $gray;
+	margin: 40px 0 40px;
+
+	&__submit {
+		width: 140px;
+	}
+}
+ 
+.goods-list {
+	width: 100%;
+	padding: 0 4px;
+
+	&:hover {
+		background-color: rgb(233, 236, 255);
+	}
+}
+
+.goods {
+	display: flex;
+}
+
+.ant-form-item {
+	margin: 10px;
+}
+
+.ant-form-item-label {
+	width: 100px;
+}
+
+.ant-select {
+	width: 100px;
+}
+
+span.ant-radio {
+	width: 100% !important;
+}
+

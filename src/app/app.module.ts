@@ -24,7 +24,7 @@ registerLocaleData(uk);
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: uk_UA }],
+  providers: [{ provide: NZ_I18N, useValue: uk }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
