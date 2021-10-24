@@ -26,11 +26,10 @@
 						<nz-radio-group [(ngModel)]="m.selectedItem" (ngModelChange)="onItemSelected(m, im)">
 							<label class="goods-list" nz-radio *ngFor="let i of m.list" [nzValue]="i">
 								<div class="goods">
+									<div class="goods__image">
+										<img src="{{i.photo}}" alt="image">
+									</div>
 									<div class="goods__name">{{i.itemName}}</div>
-									<!-- <div class="goods__bundle">{{i.bundle}}</div>
-									<div class="goods__image"></div>
-									<div class="goods__old-price">{{i.oldPrice}}</div>
-									<div class="goods__price">{{i.price}}</div> -->
 								</div>
 							</label>
 						</nz-radio-group>

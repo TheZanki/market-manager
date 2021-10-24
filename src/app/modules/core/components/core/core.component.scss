@@ -58,6 +58,20 @@ $gray: rgb(221, 221, 221);
 
 .goods {
 	display: flex;
+
+	&__name {
+		line-height: 100px;
+		margin-right: 10px;
+	}
+
+	&__image {
+		max-width: 100px;
+
+		img { 
+			width: 100%;
+
+		}
+	} 
 }
 
 .ant-form-item {

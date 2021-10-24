@@ -24,8 +24,8 @@ export class CoreComponent implements OnInit {
   public marketFormControls = [
     {name: 'itemName', value: '', title: 'Name', type: 'text'},
     {name: 'description', value: '', title: 'Description', type: 'text'},
-    {name: 'bundle', value: 0, title: 'Bundle', type: 'number'},
-    {name: 'capacity', value: 0, title: 'Capacity', type: 'number'},
+    {name: 'bundle', value: 1, title: 'Bundle', type: 'number'},
+    {name: 'capacity', value: 1, title: 'Capacity', type: 'number'},
     {name: 'silpoItemId', value: '', title: 'SilpoID', type: 'text'},
     {name: 'silpoItemName', value: '', title: 'SilpoName', type: 'text'},
     {name: 'novusItemId', value: '', title: 'NovusID', type: 'text'},
@@ -60,11 +60,22 @@ export class CoreComponent implements OnInit {
   }
 
 	public onItemSelected(m: any, im: number) {
-		const {id, itemName} = m.selectedItem,
+		const {id, itemName, customDescription} = m.selectedItem,
 			marketName = this.marketList[im].name.toLowerCase();
 
 		(this.itemForm.get(marketName + 'ItemName') as FormControl).setValue(itemName);
 		(this.itemForm.get(marketName + 'ItemId') as FormControl).setValue(id);
+
+		this.changeCustomName(itemName, customDescription);
+	}
+
+	private changeCustomName(name: string, desc: string) {
+		const {itemName, description} = this.itemForm.value;
+
+		if (!Boolean(itemName) && !Boolean(description)) {
+			(this.itemForm.get('itemName')as FormControl).setValue(name);
+			(this.itemForm.get('description')as FormControl).setValue(desc);
+		}
 	}
 
   public onSearchEnter(search: string): void {
