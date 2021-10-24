@@ -26,6 +26,7 @@ export class CoreComponent implements OnInit {
     {name: 'description', value: '', title: 'Description', type: 'text'},
     {name: 'bundle', value: 1, title: 'Bundle', type: 'number'},
     {name: 'capacity', value: 1, title: 'Capacity', type: 'number'},
+    {name: 'photo', value: '', title: 'Photo', type: 'text'},
     {name: 'silpoItemId', value: '', title: 'SilpoID', type: 'text'},
     {name: 'silpoItemName', value: '', title: 'SilpoName', type: 'text'},
     {name: 'novusItemId', value: '', title: 'NovusID', type: 'text'},
@@ -52,7 +53,8 @@ export class CoreComponent implements OnInit {
 		this._apiService.save(body).subscribe(
 			data => {
 				this._notification.create('success', `The new product was created successfully`);
-				this.itemForm.reset();
+				this.initForm();
+				this.resetMarketList();
 			}, error => {
 				this._notification.create('error', `New console error`);
 				console.error(error);
@@ -60,22 +62,27 @@ export class CoreComponent implements OnInit {
   }
 
 	public onItemSelected(m: any, im: number) {
-		const {id, itemName, customDescription} = m.selectedItem,
+		const {id, itemName, customDescription, photo} = m.selectedItem,
 			marketName = this.marketList[im].name.toLowerCase();
 
 		(this.itemForm.get(marketName + 'ItemName') as FormControl).setValue(itemName);
 		(this.itemForm.get(marketName + 'ItemId') as FormControl).setValue(id);
 
-		this.changeCustomName(itemName, customDescription);
+		this.changeCustomName(itemName, customDescription, photo);
 	}
 
-	private changeCustomName(name: string, desc: string) {
-		const {itemName, description} = this.itemForm.value;
+	private changeCustomName(name: string, desc: string, ph: string) {
+		const {itemName, description, photo} = this.itemForm.value;
 
-		if (!Boolean(itemName) && !Boolean(description)) {
+		if (!Boolean(itemName) && !Boolean(description) && !Boolean(photo)) {
 			(this.itemForm.get('itemName')as FormControl).setValue(name);
 			(this.itemForm.get('description')as FormControl).setValue(desc);
+			(this.itemForm.get('photo')as FormControl).setValue(ph);
 		}
+	}
+
+	private resetMarketList() {
+		this.marketList.forEach((i) => i.selectedItem = null)
 	}
 
   public onSearchEnter(search: string): void {
